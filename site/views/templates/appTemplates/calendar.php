@@ -26,30 +26,16 @@
 
       <div class="eventsOwner">
 
+        <?php
+
+           $calendar->get_family_lids();
+
+         ?>
+
       </div>
 
       <button id="bored">I am bored</button>
 
    </div>
-
-</div>
-
-<div class="tools">
-
-    <img src="" alt="" id="addNote">
-
-    <div class="toolsHeader">
-
-      <div class="modes">
-
-         <h3>Where would you like to go?</h3>
-         <p>"Collective mode"</p>
-         <p>"Private mode"</p>
-
-      </div>
-
-      <img src="" alt="" id="micro">
-
-    </div>
 
 </div>

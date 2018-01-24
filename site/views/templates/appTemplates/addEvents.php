@@ -114,6 +114,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    border: 1px solid gray;
+    border-radius: 5px;
 
   }
 

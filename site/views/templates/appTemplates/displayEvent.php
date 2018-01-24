@@ -17,6 +17,8 @@
      flex-direction: column;
      justify-content: center;
      align-items: center;
+     border: 1px solid gray;
+     border-radius: 5px;
 
    }
 

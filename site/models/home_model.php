@@ -1,6 +1,6 @@
 <?php
     require "../mediaServer/site/core/model.php";
-    require '../mediaServer/site/models/ajax_requests/_connection.php';
+    require '../mediaServer/site/models/ajax_requests/pdo_connection.php';
     class Calendar extends model
     {
 
@@ -88,8 +88,8 @@
         public function eventNotifier($eventDay)
         {
 
-           $ = ();
-           $eventNotification = $->prepare("SELECT name FROM events WHERE start_date=? LIMIT 3");
+           $pdo = pdo();
+           $eventNotification = $pdo->prepare("SELECT name FROM events WHERE start_date=? LIMIT 3");
            $eventNotification->execute(array($eventDay));
            while($displayNotificationBar = $eventNotification->fetch())
            {
@@ -215,6 +215,34 @@
             }
 
         }
+
+
+
+       public function get_family_lids()
+       {
+
+           $pdo = pdo();
+           $getLids = $pdo->query("SELECT * FROM family_lids");
+           while($displayLids = $getLids->fetch())
+           {
+
+              ?>
+
+              <div class="lids">
+
+                 <div class="allLids" style="border: 1px solid <?php echo $displayLids['lid_color'];?>;">
+
+                 </div>
+
+                 <p style="color: <?php echo $displayLids['lid_color'];?>;"><?php echo $displayLids['lid_name'];?></p>
+
+              </div>
+
+              <?php
+
+           }
+
+       }
 
     }
 

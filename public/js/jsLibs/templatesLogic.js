@@ -76,7 +76,8 @@ EventsTemplate = {
 
               //receiver.innerHTML = xhr.responseText;
               alert(xhr.responseText);
-              Utils.goHomeEvent();
+              Utils.hideTemplate('addEventTemplate');
+              Utils.loadTemplate('calendarTemplate .agenda');
 
            }
 
@@ -138,7 +139,10 @@ EventsTemplate = {
                  evtContArr.addEventListener('click', function(e){
 
                     let eventName = e.currentTarget.childNodes[1].textContent;
-                    EventsTemplate.displayEventTemplate(eventName);
+                    Utils.hideTemplate('displayEventTemplate');
+                    Utils.loadTemplate('eventDetailTemplate');
+
+                    EventsTemplate.displayEventContent(eventName);
 
                  })
 
@@ -149,36 +153,6 @@ EventsTemplate = {
        };
 
        xhr.open('GET','../mediaServer/site/models/ajax_requests/displayEvents.php?dateNumb='+dateNumb+'&curMonth='+parsedCurMonth,true);
-       xhr.send();
-
-   },
-
-
-
-
-   displayEventTemplate: function(eventName)
-   {
-
-      let xhr = Utils.initXHR();
-      let tempName = "eventsDetails";
-      let receiver = document.querySelector('.agenda');
-
-      xhr.onreadystatechange = function() {
-
-        if (this.readyState == 4 && this.status == 200) {
-
-              receiver.innerHTML = xhr.responseText;
-
-
-              EventsTemplate.displayEventContent(eventName);
-
-
-           }
-
-        };
-
-
-       xhr.open('GET','../mediaServer/site/views/templates/appTemplates/'+tempName+'.php',true);
        xhr.send();
 
    },
@@ -197,9 +171,14 @@ EventsTemplate = {
 
              let evtContent = document.querySelector('.evtContent');
              evtContent.innerHTML = xhr.responseText;
+             let response = xhr.responseText;
 
              EventsTemplate.editEvent();
              EventsTemplate.deleteEvent(eventName);
+
+             $("#backToEventsDetails").click(Route.backToEvents);
+
+             console.log(response);
 
           }
 
@@ -217,47 +196,55 @@ EventsTemplate = {
 
        $("#editEvent").click(function(e){
 
-         let tempName = "editEvent";
-         let receiver = document.querySelector('.agenda');
-         let xhr = Utils.initXHR();
+             Route.goToEditEvent();
 
-          let curEvtName = e.currentTarget.parentNode.parentNode.childNodes[3].childNodes[1].textContent;
+             let editEventCont = document.querySelector('.editEventCont');
 
-         xhr.onreadystatechange = function() {
+             let xhr = Utils.initXHR();
 
-           if (this.readyState == 4 && this.status == 200) {
+              let curEvtName = e.currentTarget.parentNode.parentNode.childNodes[3].childNodes[1].textContent;
 
-                 receiver.innerHTML = xhr.responseText;
+             xhr.onreadystatechange = function() {
 
-                 EventsTemplate.eventNewData();// update function
+               if (this.readyState == 4 && this.status == 200) {
 
-              }
+                     editEventCont.innerHTML = xhr.responseText;
 
-           };
+                     EventsTemplate.eventNewData(curEvtName);// update function
+
+                     $("#editBackToEvent").click(function(){
+
+                          Route.backToEventContent('editEventTemplate');
+
+                      })
+
+                  }
+
+               };
 
 
-          xhr.open('GET','../mediaServer/site/views/templates/appTemplates/'+tempName+'.php?curEvtName='+curEvtName,true);
-          xhr.send();
+              xhr.open('GET','../mediaServer/site/models/ajax_requests/editEvent.php?curEvtName='+curEvtName,true);
+              xhr.send();
 
-       })
+        })
 
      },
 
 
-     eventNewData: function()
+     eventNewData: function(curEvtName)
      {
 
 
         $('#editNewEvent').click(function()
         {
 
-            let eventName = document.getElementById("eventName").value;
-            let eventLocation = document.getElementById("eventLocation").value;
-            let eventStart = document.getElementById("eventStart").value;
-            let eventEnd = document.getElementById("eventEnd").value;
-            let eventTimeStart = document.getElementById("eventTimeStart").value;
-            let eventTimeEnd = document.getElementById("eventTimeEnd").value;
-            let allDay = document.getElementById("allDay");
+            let eventName = document.getElementById("eventNameUpdate").value;
+            let eventLocation = document.getElementById("eventLocationUpdate").value;
+            let eventStart = document.getElementById("eventStartUpdate").value;
+            let eventEnd = document.getElementById("eventEndUpdate").value;
+            let eventTimeStart = document.getElementById("eventTimeStartUpdate").value;
+            let eventTimeEnd = document.getElementById("eventTimeEndUpdate").value;
+            let allDay = document.getElementById("allDayUpdate");
             let allDayVal ;
 
             if(allDay.checked)
@@ -283,22 +270,23 @@ EventsTemplate = {
 
                     //receiver.innerHTML = xhr.responseText;
                     alert(xhr.responseText);
-                   // Utils.goHomeEvent();
+                    Route.backToEventContent('editEventTemplate');
+                    EventsTemplate.displayEventContent(curEvtName);
 
                  }
 
               };
 
 
-             if(eventName != "" && eventLocation != "" && eventStart != "" && eventEnd != "" && eventTimeStart != "" && eventTimeEnd != "")
+             if(eventName != "" || eventLocation != "" || eventStart != "" || eventEnd != "" || eventTimeStart != "" || eventTimeEnd != "")
              {
 
-               xhr.open('GET','../mediaServer/site/models/ajax_requests/updateEvent.php?eventName='+eventName+'&eventLocation='+eventLocation+'&eventStart='+eventStart+'&eventEnd='+eventEnd+'&eventTimeStart='+eventTimeStart+'&eventTimeEnd='+eventTimeEnd+'&allDayVal='+allDayVal+'&invites='+invites,true);
+               xhr.open('GET','../mediaServer/site/models/ajax_requests/updateEvent.php?eventName='+eventName+'&eventLocation='+eventLocation+'&eventStart='+eventStart+'&eventEnd='+eventEnd+'&eventTimeStart='+eventTimeStart+'&eventTimeEnd='+eventTimeEnd+'&allDayVal='+allDayVal+'&invites='+invites+'&curEvtName='+curEvtName,true);
                xhr.send();
 
              }else{
 
-               alert("You have to fill all the fields...");
+               alert("One of many of the fields is empty...");
 
              }
 
@@ -311,7 +299,7 @@ EventsTemplate = {
     deleteEvent: function(evtName)
     {
 
-        $("#deleteEvt").click(function(){
+        $("#deleteEvt").click(function(e){
 
           let xhr = Utils.initXHR();
 
@@ -320,6 +308,13 @@ EventsTemplate = {
             if (this.readyState == 4 && this.status == 200) {
 
                   alert(xhr.responseText);
+                  let deletedEvent = e.currentTarget.parentNode.parentNode;
+                  //$(deletedEvent).toggle('explode');
+
+                  Utils.hideTemplate('eventDetailTemplate');
+                  Utils.loadTemplate('displayEventTemplate');
+
+                  $(".evtDetails").html('No event available...!');
 
                }
 

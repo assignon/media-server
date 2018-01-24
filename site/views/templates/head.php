@@ -32,5 +32,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenMax.min.js"></script>
 <script src="../<?php echo $main_map; ?>/public/js/jsLibs/utils.js"></script>
 <script src="../<?php echo $main_map; ?>/public/js/jsLibs/templatesLogic.js"></script>
+<script src="../<?php echo $main_map; ?>/public/js/jsLibs/router.js"></script>
+<script src="../<?php echo $main_map; ?>/public/js/jsLibs/animation.js"></script>
 <!--<script src="public/js/jquery.js"></script>
 <script src="public/js/jquery-ui/jquery-ui.js"></script>-->

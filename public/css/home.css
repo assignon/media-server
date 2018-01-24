@@ -7,6 +7,14 @@ html, body
 }
 
 
+.gsapAnim
+{
+
+   opacity: 0;
+
+}
+
+
 .homeCore
 {
 
@@ -73,7 +81,54 @@ html, body
    height: 95%;
    display: flex;
    flex-direction: column;
-   justify-content: space-between;
-   align-items: center;
+   justify-content: center;
+   align-items: flex-start;
+
+}
+
+
+.calendarHeaders
+{
+
+    width: 100%;
+    height: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+.templateContainers
+{
+
+    width: 38%;
+    height: 71%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    position: absolute;
+    background-color: white;
+
+}
+
+
+/*#addEventTemplate
+{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid red;
+
+}*/
+
+
+#addEventTemplate, #eventDetailTemplate, #editEventTemplate
+{
+
+   display: none;
 
 }

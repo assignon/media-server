@@ -5,32 +5,22 @@ $(function(){
 
         let tempName = e.target.id;
         let receiver = document.querySelector('.agenda');
-        $('.agendaHeader').hide('slow');
-
-        let xhr = Utils.initXHR();
-
-
-        xhr.onreadystatechange = function() {
-
-          if (this.readyState == 4 && this.status == 200) {
-
-                receiver.innerHTML = xhr.responseText;
-
-                let addNewEvent = document.querySelector('.agenda #addNewEvent');
-                addNewEvent.addEventListener('click', EventsTemplate.addEvents)
-
-                $("#backToEvent").click(backToHome);
-
-             }
-
-          };
-
-
-         xhr.open('GET','../mediaServer/site/views/templates/appTemplates/'+tempName+'.php',true);
-         xhr.send();
-
+      //  $('.agendaHeader').hide('slow');
+        Utils.hideTemplate("calendarTemplate .agenda");
+        Utils.loadTemplate('addEventTemplate');
 
      })
+
+     let addNewEvent = document.querySelector('#addNewEvent');
+     addNewEvent.addEventListener('click', EventsTemplate.addEvents)
+
+     $("#backToEvent").click(function(){
+
+       Utils.hideTemplate('addEventTemplate');
+       Utils.loadTemplate('calendarTemplate .agenda');
+
+     });
+
 
 
      $('.daysNumb').click(function(e){
@@ -39,54 +29,16 @@ $(function(){
        let receiver = document.querySelector('.agenda');
        let xhr = Utils.initXHR();
 
-       xhr.onreadystatechange = function() {
+       Utils.hideTemplate('calendarTemplate .agenda');
+       Utils.loadTemplate('displayEventTemplate');
 
-         if (this.readyState == 4 && this.status == 200) {
+       let dateNumb = e.currentTarget.childNodes[1].textContent;
+       let curMonth = e.currentTarget.childNodes[1].className;
 
-               receiver.innerHTML = xhr.responseText;
+       EventsTemplate.displayEvents(dateNumb, curMonth);
 
-               let dateNumb = e.currentTarget.childNodes[1].textContent;
-               let curMonth = e.currentTarget.childNodes[1].className;
-
-               EventsTemplate.displayEvents(dateNumb, curMonth);
-
-
-            }
-
-         };
-
-
-        xhr.open('GET','../mediaServer/site/views/templates/appTemplates/'+tempName+'.php',true);
-        xhr.send();
 
      })
-
-
-     function backToHome()
-     {
-
-        let receiver = document.querySelector('.agenda');
-        let tempName = 'eventHome';
-        let xhr = Utils.initXHR();
-
-
-        xhr.onreadystatechange = function() {
-
-          if (this.readyState == 4 && this.status == 200) {
-
-                receiver.innerHTML = xhr.responseText;
-
-              //alert(xhr.responseText);
-
-             }
-
-          };
-
-
-         xhr.open('GET','../mediaServer/site/models/'+tempName+'.php',true);
-         xhr.send();
-
-     }
 
 
 })

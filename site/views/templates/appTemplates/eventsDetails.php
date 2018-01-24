@@ -16,6 +16,8 @@
    flex-direction: column;
    justify-content: flex-start;
    align-items: flex-end;
+   border: 1px solid gray;
+   border-radius: 5px;
 
 }
 
@@ -275,9 +277,65 @@
      width: 100%;
      height: 90%;
      display: flex;
-     flex-direction: column;
-     justify-content: flex-end;
+     justify-content: flex-start;
      align-items: center;
+
+   }
+
+
+   .lidsCont
+   {
+
+     width: 400px;
+     height: 90%;
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+     align-items: center;
+
+   }
+
+
+   .evtInvites .invites
+   {
+
+     width: 100px;
+     height: auto;
+     display: flex;
+     flex-direction: row;
+     justify-content: flex-start;
+     align-items: center;
+     margin-bottom: -3px;
+     margin-left: 25px;
+     margin-right: 25px;
+
+   }
+
+
+   .invitedOrNot
+   {
+
+      width: 20px;
+      height: 20px;
+      border: 1px solid #2D3C77;
+      border-radius: 5px;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+   }
+
+
+   .evtInvites .invites p
+   {
+
+      text-align: center;
+      color: #2D3C77;
+      font-size: 17px;
+      margin-left: 5px;
 
    }
 

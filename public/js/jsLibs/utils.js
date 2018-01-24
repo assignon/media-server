@@ -42,6 +42,23 @@ Utils = {
    },
 
 
+   loadTemplate: function(templateName)
+   {
+
+      $('#'+templateName).show('slow');
+      $('#'+templateName).css('zIndex',5);
+
+   },
+
+
+   hideTemplate: function(templateName)
+   {
+
+      $('#'+templateName).hide("slow");
+      $('#'+templateName).css('zIndex',1);
+   },
+
+
    goHomeEvent: function()
    {
 

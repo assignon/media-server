@@ -5,8 +5,8 @@
 .agenda
 {
 
-   width: 95%;
-   height: 75%;
+   width: 100%;
+   height: 100%;
    display: flex;
    flex-direction: column;
    justify-content: space-between;
@@ -20,13 +20,12 @@
 .agendaHeader
 {
 
-   width: 95%;
+   width: 90%;
    height: 20%;
    display: flex;
    flex-direction: row;
    justify-content: center;
    align-items: center;
-   margin-bottom: 10px;
    margin-top: 20px;
 }
 
@@ -36,7 +35,7 @@
 
    text-align: center;
    color: #2D3C77;
-   width: 80%;
+   width: 95%;
 
 }
 
@@ -104,8 +103,8 @@
 
    text-align: center;
    color: #2D3C77;
-   margin-left: 9px;
-   margin-right: 23px;
+   margin-left: 20px;
+   margin-right: 25px;
    margin-bottom: 0px;
    width: 30px;
 
@@ -121,10 +120,9 @@
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-  width: 470px;
+  width: 480px;
   height: auto;
-  margin-left: 40px;
-
+  margin-top: 10px;
 }
 
 
@@ -137,10 +135,10 @@
    flex-direction: column;
    justify-content: center;
    align-items: center;
-   margin-left: 15px;
-   margin-right: 15px;
-   margin-bottom: 15px;
-   margin-top: 15px;
+   margin-left: 20px;
+   margin-right: 17px;
+   margin-bottom: 20px;
+   margin-top: 10px;
 
 }
 
@@ -200,8 +198,9 @@
    flex-direction: row;
    justify-content: space-between;
    align-items: flex-start;
+   margin-bottom: -40px;
    position: relative;
-   bottom: 10px;
+   bottom: 50px;
 
 }
 
@@ -214,9 +213,52 @@
    display: flex;
    flex-direction: row;
    flex-wrap: wrap;
-   justify-content: center;
+   justify-content: flex-start;
    align-items: flex-start;
-   border: 1px solid green;
+   margin-left: 10px;
+
+}
+
+
+.eventsOwner .lids
+{
+
+  width: 100px;
+  height: 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: -3px;
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
+
+
+.eventsOwner .allLids
+{
+
+   width: 15px;
+   height: 15px;
+   border: 1px solid #2D3C77;
+   border-radius: 5px;
+   background-position: center;
+   background-repeat: no-repeat;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+}
+
+
+.eventsOwner p
+{
+
+   text-align: center;
+   color: #2D3C77;
+   font-size: 17px;
+   margin-left: 5px;
 
 }
 
@@ -237,94 +279,6 @@
    cursor: pointer;
 
 }
-
-
-
-.tools
-{
-
-   width: 95%;
-   height: 22%;
-   display: flex;
-   flex-direction: row;
-   justify-content: space-between;
-   align-items: center;
-
-}
-
-
-
-#addNote
-{
-
-    height: 100%;
-    width: 200px;
-    border: 1px solid #E9C53C;
-    background-color: #E9C53C;
-    cursor: pointer;
-
-}
-
-
-.toolsHeader
-{
-
-   width: 75%;
-   height: 100%;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   align-items: flex-end;
-
-}
-
-
-.modes
-{
-
-   width: 100%;
-   height: 50%;
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   align-items: flex-end;
-
-}
-
-
-.modes h3
-{
-
-   text-align: left;
-   color: #2D3C77;
-   margin: 0px;
-
-}
-
-
-.modes p
-{
-
-   text-align: left;
-   font-size: 18px;
-   color: #2D3C77;
-   margin: 0px;
-
-}
-
-
-#micro
-{
-
-   width: 40px;
-   height: 40px;
-   border: 1px solid #F65F59;
-   border-radius: 100%;
-   background-color: #F65F59;
-   cursor: pointer;
-
-}
-
 
 /***************************************************************************************************************************************/
 /************************************************************ HOME WEATHER STYLE *********************************************************************/
@@ -386,6 +340,7 @@
 {
 
    font-size: 40px;
+   text-align: right;
 
 }
 

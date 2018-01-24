@@ -9,6 +9,15 @@
     $getEvent = $pdo->prepare('SELECT * FROM events WHERE name=?');
     $getEvent->execute(array($eventName));
 
+    $getLids = $pdo->query("SELECT * FROM family_lids");
+
+    $getInvites = $pdo->prepare("SELECT invites FROM invites WHERE event_name=?");
+    $getInvites->execute(array($eventName));
+
+    $displayInvites = $getInvites->fetch();
+    $replace = str_replace(',', ' ', $displayInvites);
+    $invites = explode(' ', $replace[0]);
+
 
       while($displayEvt = $getEvent->fetch())
       {
@@ -17,7 +26,7 @@
 
          <div class="evtDisplayHeader">
 
-           <img src="../mediaServer/public/media/events/eventleft.svg" alt="" id="backToEvents">
+           <img src="../mediaServer/public/media/events/eventleft.svg" alt="" id="backToEventsDetails">
            <h2>Event details</h2>
            <h3 id="editEvent">Edit</h3>
 
@@ -59,6 +68,51 @@
          <div class="evtDisplayFooter">
 
            <div class="evtInvites">
+
+              <div class="lidsCont">
+
+                <?php
+
+                    while ($displayLids = $getLids->fetch()) {
+
+                       ?>
+
+                        <div class="invites">
+
+                           <div class="invitedOrNot" id="<?php echo $displayLids['lid_name'];?>">
+
+                             <?php
+
+                               foreach ($invites as $value) {
+
+                                  if($value == $displayLids['lid_name'])
+                                  {
+
+                                     ?>
+
+                                       <img src="../mediaServer/public/media/events/checkMark.svg" alt="" style="width: 15px; height:15px;">
+
+                                     <?php
+
+                                  }
+
+                               }
+
+                              ?>
+
+                           </div>
+
+                           <p><?php echo $displayLids['lid_name'];?></p>
+
+                        </div>
+
+                       <?php
+
+                    }
+
+                 ?>
+
+              </div>
 
            </div>
 
